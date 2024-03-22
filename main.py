@@ -1,6 +1,7 @@
 import numpy as np
 import ClassUtils as cu
 import matplotlib.pyplot as plt
+
 # Boundary Conditions
 Tb = 100;       # ºC
 Tinf = 20;      # ºC
@@ -15,14 +16,20 @@ N = 100;
 k = 385;        # W/m·K
 b = 25;         # W/m²·K
 
+# Class instantiation
 dim = cu.Dimension(L,W,H,N);
 mat = cu.Material(k, b);
 bound = cu.Boundary(Tb, Tinf);
 
 fin = cu.Fin(dim, mat, bound);
 
+# Exercise 1.
 adiabaticTemperature = fin.computeAdiabaticTemperature;
 convectiveTemperature = fin.computeConvectiveTemperature;
+adiabaticQ = fin.computeAdiabaticQ;
+convectiveQ = fin.computeConvectiveQ;
+
+print("Adiabatic Heat Loss: ", adiabaticQ, "Convective Heat Loss: ", convectiveQ);
 
 plt.plot(adiabaticTemperature, label="Adiabatic Temperature")
 plt.plot(convectiveTemperature, label="Convective Temperature")
@@ -31,6 +38,11 @@ plt.ylabel("Value [ºC]")
 plt.title("Adiabatic Vs Convective Temperature")
 plt.show();
 
+# Exercise 2
+efficiency = fin.computeEfficiency
+adiabaticEffectiveness = fin.computeAdiabaticEffectiveness
+convectiveEffectiveness = fin.computeConvectiveEffectiveness
+print("Efficiency:", efficiency,"Adiabatic Effectiveness:", adiabaticEffectiveness, "Convective Effectivenes:", convectiveEffectiveness);
 
 
 # def init():
